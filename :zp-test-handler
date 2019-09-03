@@ -7,11 +7,22 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
 
 (
     cd $dir
+    integer quiet=0
+    zstyle -T ":z-plugin:test" quiet && quiet=1
+
     if [[ -f Makefile ]]; then
         …zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
             print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS"
-            make test
+            if (( quiet )); then
+                if make test &>/dev/null; then
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded"
+                else
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed"
+                fi
+            else
+                make test
+            fi
         fi
     fi
     local -a farray
@@ -19,7 +30,15 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     if (( ${#farray} )); then
         if type zunit >/dev/null 2>&1; then
             print -P -- "%F{38}test z-plugin: %F{154}RUNNING ZUNIT TESTS"
-            zunit
+            if (( quiet )); then
+                if zunit &>/dev/null; then
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded"
+                else
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed"
+                fi
+            else
+                zunit
+            fi
         else
             print -P -- "%F{38}test z-plugin: %F{154}Please install molovo/zunit to" \
                    " run the zunit tests provided with the plugin%f"
