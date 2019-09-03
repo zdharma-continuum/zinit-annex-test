@@ -1,2 +1,19 @@
 # z-p-test
-Zsh-Zplugin extension that runs tests (via make test, for example) after installing and updating a plugin or snippet
+Zsh-Zplugin extension that runs tests (via `make test`, for example) – if it
+finds any of them  – after installing and updating a plugin or snippet. Simply
+load it as a plugin to make it active:
+
+```zsh
+zplugin light zdharma/z-p-test
+```
+
+Example activation in the default quiet mode:
+
+![z-p-test activation](https://raw.githubusercontent.com/zdharma/z-p-test/master/images/z-p-test-1.png)
+
+
+Example activation in non-quiet mode:
+
+![z-p-test activation](https://raw.githubusercontent.com/zdharma/z-p-test/master/images/z-p-test-2.png)
+
+<!-- vim:set ft=markdown:tw=80: -->
