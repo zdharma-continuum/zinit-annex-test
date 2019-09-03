@@ -1,3 +1,9 @@
+*.zwc
+*zcompdump*
+._zplugin
+.zplugin_lstupd
+zsdoc/data
+
 # Prerequisites
 *.d
 
