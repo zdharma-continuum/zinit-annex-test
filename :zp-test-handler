@@ -16,9 +16,9 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
             print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS"
             if (( quiet )); then
                 if make test &>/dev/null; then
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded"
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed"
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
                 fi
             else
                 make test
