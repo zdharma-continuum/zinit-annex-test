@@ -13,7 +13,7 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     if [[ -f Makefile ]]; then
         …zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
-            print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS"
+            print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS%f"
             if (( quiet )); then
                 if make test &>/dev/null; then
                     print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
@@ -29,12 +29,12 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     farray=( **/*.zunit(N) )
     if (( ${#farray} )); then
         if type zunit >/dev/null 2>&1; then
-            print -P -- "%F{38}test z-plugin: %F{154}RUNNING ZUNIT TESTS"
+            print -P -- "%F{38}test z-plugin: %F{154}RUNNING ZUNIT TESTS%f"
             if (( quiet )); then
                 if zunit &>/dev/null; then
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded"
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed"
+                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
                 fi
             else
                 zunit
