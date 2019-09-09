@@ -6,13 +6,11 @@
 
 autoload -Uz :zp-test-handler …zp-test-make-targets
 
-
-@zplg-register-z-plugin "z-p-test" hook:atclone \
+@zplg-register-annex "z-a-test" hook:atclone \
     :zp-test-handler \
     :zp-test-help-handler \
     "test''" # register a new ice-mod: test''
 
-@zplg-register-z-plugin "z-p-test" hook:atpull \
+@zplg-register-annex "z-a-test" hook:atpull \
     :zp-test-handler \
     :zp-test-help-handler
-
