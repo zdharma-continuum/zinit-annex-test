@@ -13,12 +13,15 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     if [[ -f Makefile ]]; then
         …zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
-            print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS%f"
+            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS%f"
             if (( quiet )); then
                 if make test &>/dev/null; then
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
+                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                        print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
+                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                        print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
                 fi
             else
                 make test
@@ -29,18 +32,22 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     farray=( **/*.zunit(N) )
     if (( ${#farray} )); then
         if type zunit >/dev/null 2>&1; then
-            print -P -- "%F{38}test z-plugin: %F{154}RUNNING ZUNIT TESTS%f"
+            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                print -P -- "%F{38}test z-plugin: %F{154}RUNNING ZUNIT TESTS%f"
             if (( quiet )); then
                 if zunit &>/dev/null; then
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
+                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                        print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
-                    print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
+                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                        print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
                 fi
             else
                 zunit
             fi
         else
-            print -P -- "%F{38}test z-plugin: %F{154}Please install molovo/zunit to" \
+            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                print -P -- "%F{38}test z-plugin: %F{154}Please install molovo/zunit to" \
                    " run the zunit tests provided with the plugin%f"
         fi
     fi
