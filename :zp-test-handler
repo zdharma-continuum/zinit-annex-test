@@ -23,7 +23,7 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
                         print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
                     [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
+                        print -P -- "%F{38}test z-plugin: %F{160}The tests have failed%f"
                 fi
             else
                 make test
@@ -42,7 +42,7 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
                         print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
                     [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}test z-plugin: %F{154}The tests have failed%f"
+                        print -P -- "%F{38}test z-plugin: %F{160}The tests have failed%f"
                 fi
             else
                 zunit
