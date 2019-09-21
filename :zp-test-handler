@@ -10,7 +10,7 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
 (
     cd $dir
     integer quiet=0
-    zstyle -T ":z-plugin:test" quiet && quiet=1
+    zstyle -T ":zplugin:annex:test" quiet && quiet=1
 
     if [[ -f Makefile ]]; then
         …zp-test-make-targets Makefile
