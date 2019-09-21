@@ -9,14 +9,12 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
 
 (
     cd $dir
-    integer quiet=0
-    zstyle -T ":zplugin:annex:test" quiet && quiet=1
 
     if [[ -f Makefile ]]; then
         …zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
-            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS%f"
+            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]]
+            quiet=1
             if (( quiet )); then
                 if make test &>/dev/null; then
                     [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
