@@ -13,7 +13,7 @@ autoload -Uz :zp-test-handler …zp-test-make-targets
 @zplg-register-annex "z-a-test" hook:atclone \
     :zp-test-handler \
     :za-test-help-null-handler \
-    "test''" # register a new ice-mod: test''
+    "notest|test''" # register a new ice-mod: test''
 
 # Register atpull hook
 @zplg-register-annex "z-a-test" hook:atpull \
