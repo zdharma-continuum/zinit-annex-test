@@ -9,6 +9,22 @@ a plugin or snippet. Simply load it like any other plugin to make it active:
 zplugin light zdharma/z-p-test
 ```
 
+## Configuration
+
+To run the tests in a verbose mode, issue:
+
+```zsh
+zstyle :zplugin:annex:test quiet 0
+```
+
+before installing or updating the plugin. To skip tests for a single plugin,
+add `notest` ice:
+
+```zsh
+zplugin ice notest
+zplugin load …
+```
+
 ## Examples
 
 Example activation in the default quiet mode:
