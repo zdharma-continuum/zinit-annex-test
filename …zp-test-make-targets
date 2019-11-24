@@ -91,6 +91,6 @@ local -a TARGETS match mbegin mend
 
 …zp-test-make-parseMakefile < "$1"
 
-reply=( "${TARGETS[@]}" )
+reply=( "${(u)TARGETS[@]}" )
 
 # vim:ft=zsh:sw=4:sts=4:et
