@@ -3,6 +3,8 @@
 #
 # Copyright (c) 2018 Sebastian Gniazdowski
 
+emulate -LR zsh -o extendedglob
+
 local -a TARGETS match mbegin mend
 
 …zp-test-make-expandVars() {
