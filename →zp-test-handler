@@ -1,13 +1,13 @@
 emulate -RL zsh
 setopt extendedglob warncreateglobal typesetsilent noshortloops
 
-(( ${ZINIT_ICE[test]:-1} )) || return 0
+(( ${ICE[test]:-1} )) || return 0
 
 [[ "$1" = plugin ]] && \
     local type="$1" user="$2" plugin="$3" id_as="$4" dir="$5" || \
     local type="$1" url="$2" id_as="$3" dir="$4"
 
-(( ${+ZINIT_ICE[notest]} )) && return 0
+(( ${+ICE[notest]} )) && return 0
 
 (
     builtin cd -q $dir
@@ -15,16 +15,16 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     if [[ -f Makefile ]]; then
         …zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
-            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+            [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                 print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS%f"
             integer quiet=0
             zstyle -T ":zplugin:annex:test" quiet && quiet=1
             if (( quiet )); then
                 if make test &>/dev/null; then
-                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                         print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
-                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                         print -P -- "%F{38}test z-plugin: %F{160}The tests have failed%f"
                 fi
             else
@@ -36,23 +36,23 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     farray=( **/*.zunit(N) )
     if (( ${#farray} )); then
         if type zunit >/dev/null 2>&1; then
-            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+            [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                 print -P -- "%F{38}test z-plugin: %F{154}RUNNING ZUNIT TESTS%f"
             integer quiet=0
             zstyle -T ":zplugin:annex:test" quiet && quiet=1
             if (( quiet )); then
                 if zunit &>/dev/null; then
-                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                         print -P -- "%F{38}test z-plugin: %F{154}The tests succeeded%f"
                 else
-                    [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                         print -P -- "%F{38}test z-plugin: %F{160}The tests have failed%f"
                 fi
             else
                 zunit
             fi
         else
-            [[ "${ICE_OPTS[opt_-q,--quiet]}" != 1 ]] && \
+            [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                 print -P -- "%F{38}test z-plugin: %F{154}Please install molovo/zunit to" \
                    " run the zunit tests provided with the plugin%f"
         fi
