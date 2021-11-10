@@ -1,7 +1,7 @@
 ## Introduction
 
 A Zsh-Zplugin extension (i.e. an
-[annex](http://zdharma.org/zplugin/wiki/Annexes/)) that runs tests (via `make
+[annex](https://zdharma-continuum.github.io/zinit/wiki/Annexes/)) that runs tests (via `make
 test`, for example) – if it finds any of them  – after installing and updating
 a plugin or snippet. Simply load it like any other plugin to make it active:
 
