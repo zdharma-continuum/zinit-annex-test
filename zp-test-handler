@@ -13,7 +13,7 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     builtin cd -q $dir
 
     if [[ -f Makefile ]]; then
-        …zp-test-make-targets Makefile
+        zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
             [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
                 print -P -- "%F{38}test z-plugin: %F{154}RUNNING MAKEFILE TESTS%f"
