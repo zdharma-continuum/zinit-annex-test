@@ -7,15 +7,15 @@
 autoload -Uz zp-test-handler zp-test-make-targets
 
 # An empty stub to fill the help handler fields
-→za-test-help-null-handler() { :; }
+za-test-help-null-handler() { :; }
 
 # Register atclone hook
 @zinit-register-annex "zinit-annex-test" hook:atclone-110 \
     zp-test-handler \
-    →za-test-help-null-handler \
+    za-test-help-null-handler \
     "notest|test''" # register a new ice-mod: test''
 
 # Register atpull hook
 @zinit-register-annex "zinit-annex-test" hook:atpull-110 \
     zp-test-handler \
-    →za-test-help-null-handler
+    za-test-help-null-handler
