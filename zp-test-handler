@@ -16,16 +16,16 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
         zp-test-make-targets Makefile
         if (( ${reply[(I)test]} )); then
             [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}test zinit: %F{154}RUNNING MAKEFILE TESTS%f"
+                print -P -- "%F{38}zinit-annex-test: %F{154}RUNNING MAKEFILE TESTS%f"
             integer quiet=0
             zstyle -T ":zplugin:annex:test" quiet && quiet=1
             if (( quiet )); then
                 if make test &>/dev/null; then
                     [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}test zinit: %F{154}The tests succeeded%f"
+                        print -P -- "%F{38}zinit-annex-test: %F{154}The tests succeeded%f"
                 else
                     [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}test zinit: %F{160}The tests have failed%f"
+                        print -P -- "%F{38}zinit-annex-test: %F{160}The tests have failed%f"
                 fi
             else
                 make test
@@ -37,23 +37,23 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
     if (( ${#farray} )); then
         if type zunit >/dev/null 2>&1; then
             [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}test zinit: %F{154}RUNNING ZUNIT TESTS%f"
+                print -P -- "%F{38}zinit-annex-test: %F{154}RUNNING ZUNIT TESTS%f"
             integer quiet=0
             zstyle -T ":zplugin:annex:test" quiet && quiet=1
             if (( quiet )); then
                 if zunit &>/dev/null; then
                     [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}test zinit: %F{154}The tests succeeded%f"
+                        print -P -- "%F{38}zinit-annex-test: %F{154}The tests succeeded%f"
                 else
                     [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}test zinit: %F{160}The tests have failed%f"
+                        print -P -- "%F{38}zinit-annex-test: %F{160}The tests have failed%f"
                 fi
             else
                 zunit
             fi
         else
             [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}test zinit: %F{154}Please install zunit-zsh/zunit to" \
+                print -P -- "%F{38}zinit-annex-test: %F{154}Please install zunit-zsh/zunit to" \
                    " run the zunit tests provided with the plugin%f"
         fi
     fi
