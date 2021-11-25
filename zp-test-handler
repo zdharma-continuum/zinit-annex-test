@@ -53,7 +53,7 @@ setopt extendedglob warncreateglobal typesetsilent noshortloops
             fi
         else
             [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}test zinit: %F{154}Please install molovo/zunit to" \
+                print -P -- "%F{38}test zinit: %F{154}Please install zunit-zsh/zunit to" \
                    " run the zunit tests provided with the plugin%f"
         fi
     fi
