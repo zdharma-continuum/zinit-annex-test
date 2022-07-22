@@ -1,62 +1,62 @@
+#!/usr/bin/env zsh
+# -*- mode: sh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
+#
+# Copyright (c) 2016-2021 Sebastian Gniazdowski and contributors
+# Copyright (c) 2021-2022 zdharma-continuum and contributors
+#
+
 emulate -RL zsh
 setopt extendedglob warncreateglobal typesetsilent noshortloops
-
 (( ${ICE[test]:-1} )) || return 0
-
-[[ "$1" = plugin ]] && \
-    local type="$1" user="$2" plugin="$3" id_as="$4" dir="$5" || \
-    local type="$1" url="$2" id_as="$3" dir="$4"
-
+[[ "$1" = plugin ]] && local type="$1" user="$2" plugin="$3" id_as="$4" dir="$5"  || local type="$1" url="$2" id_as="$3" dir="$4"
 (( ${+ICE[notest]} )) && return 0
-
 (
-    builtin cd -q $dir
-
-    if [[ -f Makefile ]]; then
-        zp-test-make-targets Makefile
-        if (( ${reply[(I)test]} )); then
-            [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}zinit-annex-test: %F{154}RUNNING MAKEFILE TESTS%f"
-            integer quiet=0
-            zstyle -T ":zplugin:annex:test" quiet && quiet=1
-            if (( quiet )); then
-                if make test &>/dev/null; then
-                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}zinit-annex-test: %F{154}The tests succeeded%f"
-                else
-                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}zinit-annex-test: %F{160}The tests have failed%f"
-                fi
-            else
-                make test
-            fi
-        fi
-    fi
-    local -a farray
-    farray=( **/*.zunit(N) )
-    if (( ${#farray} )); then
-        if type zunit >/dev/null 2>&1; then
-            [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}zinit-annex-test: %F{154}RUNNING ZUNIT TESTS%f"
-            integer quiet=0
-            zstyle -T ":zplugin:annex:test" quiet && quiet=1
-            if (( quiet )); then
-                if zunit &>/dev/null; then
-                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}zinit-annex-test: %F{154}The tests succeeded%f"
-                else
-                    [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                        print -P -- "%F{38}zinit-annex-test: %F{160}The tests have failed%f"
-                fi
-            else
-                zunit
-            fi
+  builtin cd -q $dir
+  if [[ -f Makefile ]]
+  then
+    zp-test-make-targets Makefile
+    if (( ${reply[(I)test]} ))
+    then
+      [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{154}RUNNING MAKEFILE TESTS%f"
+      integer quiet=0
+      zstyle -T ":zplugin:annex:test" quiet && quiet=1
+      if (( quiet ))
+      then
+        if make test &> /dev/null
+        then
+          [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{154}The tests succeeded%f"
         else
-            [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && \
-                print -P -- "%F{38}zinit-annex-test: %F{154}Please install zunit-zsh/zunit to" \
-                   " run the zunit tests provided with the plugin%f"
+          [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{160}The tests have failed%f"
         fi
+      else
+        make test
+      fi
     fi
+  fi
+  local -a farray
+  farray=(**/*.zunit(N))
+  if (( ${#farray} ))
+  then
+    if type zunit > /dev/null 2>&1
+    then
+      [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{154}RUNNING ZUNIT TESTS%f"
+      integer quiet=0
+      zstyle -T ":zplugin:annex:test" quiet && quiet=1
+      if (( quiet ))
+      then
+        if zunit &> /dev/null
+        then
+          [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{154}The tests succeeded%f"
+        else
+          [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{160}The tests have failed%f"
+        fi
+      else
+        zunit
+      fi
+    else
+      [[ "${OPTS[opt_-q,--quiet]}" != 1 ]] && print -P -- "%F{38}zinit-annex-test: %F{154}Please install zunit-zsh/zunit to" " run the zunit tests provided with the plugin%f"
+    fi
+  fi
 )
 
-# vim:ft=zsh:sw=4:sts=4:et
+# vim:ft=zsh:sw=2:sts=2:
