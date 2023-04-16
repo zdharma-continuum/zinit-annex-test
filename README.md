@@ -1,8 +1,8 @@
 # zinit-annex-test
 
 A [Zinit](https://github.com/zdharma-continuum/zinit) extension (i.e., an
-[annex](https://zdharma-continuum.github.io/zinit/wiki/Annexes/)) that attempts
-to run tests via the `make test` target after installing or updating a plugin.
+[annex](https://zdharma-continuum.github.io/zinit/wiki/Annexes/)) that attempts to run tests via the `make test` target
+after installing or updating a plugin.
 
 ```zsh
 zinit light zdharma-continuum/zinit-annex-test
